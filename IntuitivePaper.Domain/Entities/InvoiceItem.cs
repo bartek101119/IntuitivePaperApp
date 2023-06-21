@@ -18,6 +18,6 @@ namespace IntuitivePaper.Domain.Entities
         public decimal GrossAmount { get; set; } // Wartość brutto
 
         public long InvoiceId { get; set; } // Klucz obcy do faktury VAT
-        public Invoice Invoice { get; set; } = new();// Nawigacja do faktury VAT
+        public Invoice Invoice { get; set; } = default!;// Nawigacja do faktury VAT
     }
 }

@@ -1,4 +1,5 @@
 ﻿using IntuitivePaper.Domain.Entities;
+using IntuitivePaper.Infrastructure.SeederService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace IntuitivePaper.Infrastructure.Data
             .HasMany(i => i.Items)
             .WithOne(ii => ii.Invoice)
             .HasForeignKey(ii => ii.InvoiceId);
+
+            //InvoiceSeeder.Seed(modelBuilder);
         }
 
     }
