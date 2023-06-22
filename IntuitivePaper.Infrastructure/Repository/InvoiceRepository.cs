@@ -18,6 +18,10 @@ namespace IntuitivePaper.Infrastructure.Repository
         {
             _context = context;
         }
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+        }
         public async Task Create(Invoice invoice)
         {
             _context.Invoices.Add(invoice);
@@ -26,6 +30,6 @@ namespace IntuitivePaper.Infrastructure.Repository
 
         public async Task<IEnumerable<Invoice>> GetAll() => await _context.Invoices.ToListAsync();
 
-        public async Task<Invoice> GetById(long id) => await _context.Invoices.FindAsync(id);
+        public async Task<Invoice?> GetById(long id) => await _context.Invoices.FirstOrDefaultAsync(x => x.Id == id);
     }
 }

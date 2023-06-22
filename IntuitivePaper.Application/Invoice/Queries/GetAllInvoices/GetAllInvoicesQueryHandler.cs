@@ -22,7 +22,12 @@ namespace IntuitivePaper.Application.Invoice.Queries.GetAllInvoices
         }
         public async Task<IEnumerable<InvoiceDto>> Handle(GetAllInvoicesQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var invoices = await _invoiceRepository.GetAll();
+
+            var dtos = _mapper.Map<IEnumerable<InvoiceDto>>(invoices);
+
+            return dtos;
+
         }
     }
 }

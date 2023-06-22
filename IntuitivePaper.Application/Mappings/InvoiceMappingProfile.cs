@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IntuitivePaper.Application.Invoice.Commands.EditInvoice;
 using IntuitivePaper.Application.Invoice.Dtos;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,15 @@ namespace IntuitivePaper.Application.Mappings
     {
         public InvoiceMappingProfile()
         {
-            CreateMap<InvoiceDto, Domain.Entities.Invoice>();
+            Invoice();
+        }
+
+        public void Invoice()
+        {
+            CreateMap<InvoiceDto, Domain.Entities.Invoice>()
+                .ReverseMap();
+
+            CreateMap<InvoiceDto, EditInvoiceCommand>();
         }
     }
 }

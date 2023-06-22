@@ -1,0 +1,41 @@
+﻿@model IEnumerable<IntuitivePaper.Application.Invoice.Dtos.InvoiceDto>;
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numer faktury</th>
+            <th>Data wystawienia</th>
+            <th>Nazwa sprzedawcy</th>
+            <th>Adres sprzedawcy</th>
+            <th>NIP sprzedawcy</th>
+            <th>Nazwa nabywcy</th>
+            <th>Adres nabywcy</th>
+            <th>NIP nabywcy</th>
+            <th>Łączna kwota netto</th>
+            <th>Łączna kwota podatku</th>
+            <th>Łączna kwota brutto</th>
+            <th>Edytuj</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td>@invoice.Number</td>
+                <td>@invoice.Date.ToString("dd-MM-yyyy")</td>
+                <td>@invoice.SellerName</td>
+                <td>@invoice.SellerAddress</td>
+                <td>@invoice.SellerTaxId</td>
+                <td>@invoice.BuyerName</td>
+                <td>@invoice.BuyerAddress</td>
+                <td>@invoice.BuyerTaxId</td>
+                <td>@invoice.TotalNetAmount.ToString("N2")</td>
+                <td>@invoice.TotalTaxAmount.ToString("N2")</td>
+                <td>@invoice.TotalGrossAmount.ToString("N2")</td>
+                <td>
+                    <a asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

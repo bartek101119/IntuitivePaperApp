@@ -10,7 +10,8 @@ namespace IntuitivePaper.Domain.Interfaces
     public interface IInvoiceRepository
     {
         Task Create(Invoice invoice);
-        Task<Invoice> GetById(long id);
+        Task<Invoice?> GetById(long id);
         Task<IEnumerable<Invoice>> GetAll();
+        Task Save();
     }
 }

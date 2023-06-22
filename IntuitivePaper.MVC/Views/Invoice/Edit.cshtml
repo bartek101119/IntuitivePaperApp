@@ -1,0 +1,106 @@
+﻿@model IntuitivePaper.Application.Invoice.Commands.EditInvoice.EditInvoiceCommand
+
+@{
+    ViewData["Title"] = "Edytuj";
+}
+
+<h1>Edytuj</h1>
+
+<hr />
+
+<form asp-action="Edit">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Number" class="form-label">Numer</label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date" class="form-label">Data</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SellerName" class="form-label">Nazwa sprzedawcy</label>
+                <input asp-for="SellerName" class="form-control" />
+                <span asp-validation-for="SellerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SellerAddress" class="form-label">Adres sprzedawcy</label>
+                <input asp-for="SellerAddress" class="form-control" />
+                <span asp-validation-for="SellerAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SellerTaxId" class="form-label">NIP sprzedawcy</label>
+                <input asp-for="SellerTaxId" class="form-control" />
+                <span asp-validation-for="SellerTaxId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="BuyerName" class="form-label">Nazwa kupującego</label>
+                <input asp-for="BuyerName" class="form-control" />
+                <span asp-validation-for="BuyerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BuyerAddress" class="form-label">Adres nabywcy</label>
+                <input asp-for="BuyerAddress" class="form-control" />
+                <span asp-validation-for="BuyerAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BuyerTaxId" class="form-label">NIP nabywcy</label>
+                <input asp-for="BuyerTaxId" class="form-control" />
+                <span asp-validation-for="BuyerTaxId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+</style>

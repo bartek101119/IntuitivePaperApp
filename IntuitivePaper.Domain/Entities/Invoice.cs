@@ -10,7 +10,7 @@ namespace IntuitivePaper.Domain.Entities
     {
         public long Id { get; set; }
         public string Number { get; set; } = default!; // Numer faktury
-        public DateTime Date { get; set; } // Data wystawienia
+        public DateTime Date { get; set; } = default!; // Data wystawienia
         public string SellerName { get; set; } = default!; // Nazwa sprzedawcy
         public string SellerAddress { get; set; } = default!; // Adres sprzedawcy
         public string SellerTaxId { get; set; } = default!; // NIP sprzedawcy
