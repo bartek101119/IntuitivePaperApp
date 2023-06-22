@@ -1,0 +1,117 @@
+﻿@model IntuitivePaper.Application.Invoice.Dtos.InvoiceDto
+
+@{
+    ViewData["Title"] = "Szczegóły faktury";
+}
+
+<h1>Dodaj dane do faktury</h1>
+
+<hr />
+
+<div class="data-square">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="data-group">
+                <label class="data-label">Numer</label>
+                <div class="data-value">@Model.Number</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Data</label>
+                <div class="data-value">@Model.Date</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Nazwa sprzedawcy</label>
+                <div class="data-value">@Model.SellerName</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Adres sprzedawcy</label>
+                <div class="data-value">@Model.SellerAddress</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">NIP sprzedawcy</label>
+                <div class="data-value">@Model.SellerTaxId</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="data-group">
+                <label class="data-label">Nazwa nabywcy</label>
+                <div class="data-value">@Model.BuyerName</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Adres nabywcy</label>
+                <div class="data-value">@Model.BuyerAddress</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">NIP nabywcy</label>
+                <div class="data-value">@Model.BuyerTaxId</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="data-group">
+                <label class="data-label">Łączna kwota netto</label>
+                <div class="data-value">@Model.TotalNetAmount</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Łączna kwota podatku</label>
+                <div class="data-value">@Model.TotalNetAmount</div>
+            </div>
+
+            <div class="data-group">
+                <label class="data-label">Łączna kwota brutto</label>
+                <div class="data-value">@Model.TotalGrossAmount</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+<style>
+    .data-square {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .data-group {
+        margin-bottom: 20px;
+    }
+
+    .data-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .data-value {
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+</style>

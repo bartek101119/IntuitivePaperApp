@@ -15,6 +15,7 @@
             <th>Łączna kwota podatku</th>
             <th>Łączna kwota brutto</th>
             <th>Edytuj</th>
+            <th>Szczegóły</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,9 @@
                 <td>@invoice.TotalGrossAmount.ToString("N2")</td>
                 <td>
                     <a asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
+                </td>
+                <td>
+                    <a asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
                 </td>
             </tr>
         }

@@ -66,6 +66,12 @@ namespace IntuitivePaper.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("Invoice/{id}/Details")]
+        public async Task<IActionResult> Details(long id)
+        {
+            var invoiceDto = await _mediator.Send(new GetByIdInvoiceQuery(id));
 
+            return View(invoiceDto);
+        }
     }
 }
