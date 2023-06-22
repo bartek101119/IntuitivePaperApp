@@ -3,8 +3,11 @@ using IntuitivePaper.Application.Invoice.Commands.CreateInvoice;
 using IntuitivePaper.Application.Invoice.Commands.EditInvoice;
 using IntuitivePaper.Application.Invoice.Queries.GetAllInvoices;
 using IntuitivePaper.Application.Invoice.Queries.GetByIdInvoice;
+using IntuitivePaper.MVC.Extensions;
+using IntuitivePaper.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace IntuitivePaper.MVC.Controllers
 {
@@ -38,6 +41,8 @@ namespace IntuitivePaper.MVC.Controllers
             }
 
             await _mediator.Send(command);
+
+            this.SetNotification("success", $"Created invoice number: {command.Number}"); // metoda rozszerzająca do ustawiania notyfikacji
 
             return RedirectToAction(nameof(Index));
         }

@@ -1,45 +1,73 @@
-﻿@model IEnumerable<IntuitivePaper.Application.Invoice.Dtos.InvoiceDto>;
+﻿@model IEnumerable<IntuitivePaper.Application.Invoice.Dtos.InvoiceDto>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Numer faktury</th>
-            <th>Data wystawienia</th>
-            <th>Nazwa sprzedawcy</th>
-            <th>Adres sprzedawcy</th>
-            <th>NIP sprzedawcy</th>
-            <th>Nazwa nabywcy</th>
-            <th>Adres nabywcy</th>
-            <th>NIP nabywcy</th>
-            <th>Łączna kwota netto</th>
-            <th>Łączna kwota podatku</th>
-            <th>Łączna kwota brutto</th>
-            <th>Edytuj</th>
-            <th>Szczegóły</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var invoice in Model)
-        {
-            <tr>
-                <td>@invoice.Number</td>
-                <td>@invoice.Date.ToString("dd-MM-yyyy")</td>
-                <td>@invoice.SellerName</td>
-                <td>@invoice.SellerAddress</td>
-                <td>@invoice.SellerTaxId</td>
-                <td>@invoice.BuyerName</td>
-                <td>@invoice.BuyerAddress</td>
-                <td>@invoice.BuyerTaxId</td>
-                <td>@invoice.TotalNetAmount.ToString("N2")</td>
-                <td>@invoice.TotalTaxAmount.ToString("N2")</td>
-                <td>@invoice.TotalGrossAmount.ToString("N2")</td>
-                <td>
-                    <a asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
-                </td>
-                <td>
-                    <a asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var invoice in Model)
+    {
+        <div class="col-md-3 mb-3">
+            <div class="circle-card">
+                <div class="circle-content">
+                    <div class="circle-item">
+                        <div class="circle-label">Numer faktury</div>
+                        <div class="circle-value">@invoice.Number</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle-label">Data wystawienia</div>
+                        <div class="circle-value">@invoice.Date.ToString("dd-MM-yyyy")</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle-label">Nazwa sprzedawcy</div>
+                        <div class="circle-value">@invoice.SellerName</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle-label">NIP sprzedawcy</div>
+                        <div class="circle-value">@invoice.SellerTaxId</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle-label">Nazwa nabywcy</div>
+                        <div class="circle-value">@invoice.BuyerName</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle-label">NIP nabywcy</div>
+                        <div class="circle-value">@invoice.BuyerTaxId</div>
+                    </div>
+                </div>
+                <div class="circle-actions">
+                    <a class="btn btn-primary btn-sm" asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
+                    <a class="btn btn-secondary btn-sm" asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .circle-card {
+        background-color: #f7f7f7;
+        border-radius: 50%;
+        padding: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .circle-content {
+        margin-bottom: 12px;
+    }
+
+    .circle-item {
+        margin-bottom: 6px;
+    }
+
+    .circle-label {
+        font-weight: bold;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .circle-value {
+        font-size: 10px;
+    }
+
+    .circle-actions {
+        margin-top: 12px;
+    }
+</style>
