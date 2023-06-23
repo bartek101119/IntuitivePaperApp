@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntuitivePaper.Application.InvoiceItem.Commands
+namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
 {
     public class CreateInvoiceItemCommandHandler : IRequestHandler<CreateInvoiceItemCommand>
     {

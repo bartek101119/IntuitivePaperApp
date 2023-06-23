@@ -24,9 +24,24 @@ namespace IntuitivePaper.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(long id)
+        {
+            var item = await _context.InvoiceItems.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (item != null)
+            {
+                _context.InvoiceItems.Remove(item);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<InvoiceItem>> GetAllById(long id)
             => await _context.InvoiceItems
             .Where(x => x.Invoice.Id == id)
             .ToListAsync();
+
+        public async Task<InvoiceItem?> GetById(long id)
+            => await _context.InvoiceItems
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntuitivePaper.Application.InvoiceItem.Queries
+namespace IntuitivePaper.Application.InvoiceItem.Queries.GetAllInvoiceItem
 {
     public class GetAllInvoiceItemQuery : IRequest<IEnumerable<InvoiceItemDto>>
     {

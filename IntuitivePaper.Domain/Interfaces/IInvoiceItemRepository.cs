@@ -11,5 +11,7 @@ namespace IntuitivePaper.Domain.Interfaces
     {
         Task Create(InvoiceItem item);
         Task<IEnumerable<InvoiceItem>> GetAllById(long id);
+        Task<InvoiceItem?> GetById(long id);
+        Task Delete(long id);
     }
 }

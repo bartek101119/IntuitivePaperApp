@@ -3,8 +3,9 @@ using IntuitivePaper.Application.Invoice.Commands.CreateInvoice;
 using IntuitivePaper.Application.Invoice.Commands.EditInvoice;
 using IntuitivePaper.Application.Invoice.Queries.GetAllInvoices;
 using IntuitivePaper.Application.Invoice.Queries.GetByIdInvoice;
-using IntuitivePaper.Application.InvoiceItem.Commands;
-using IntuitivePaper.Application.InvoiceItem.Queries;
+using IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem;
+using IntuitivePaper.Application.InvoiceItem.Commands.RemoveInvoiceItem;
+using IntuitivePaper.Application.InvoiceItem.Queries.GetAllInvoiceItem;
 using IntuitivePaper.MVC.Extensions;
 using IntuitivePaper.MVC.Models;
 using MediatR;
@@ -70,6 +71,15 @@ namespace IntuitivePaper.MVC.Controllers
             var data = await _mediator.Send(new GetAllInvoiceItemQuery(id));
 
             return Ok(data);
+        }
+
+        [HttpDelete]
+        [Route("Invoice/{invoiceId}/InvoiceItem/{id}")]
+        public async Task<IActionResult> GetInvoiceItem(long invoiceId, long id)
+        {
+            await _mediator.Send(new RemoveInvoiceItemCommand(invoiceId, id));
+
+            return NoContent();
         }
 
         [Route("Invoice/{id}/Edit")]
