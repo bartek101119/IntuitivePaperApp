@@ -1,0 +1,78 @@
+﻿@model IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItemCommand
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createInvoiceItemModal">
+            <i class="fa fa-plus-circle"></i> Dodaj dane do faktury
+        </button>
+    </div>
+</div>
+
+<div id="createInvoiceItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h4 class="modal-title">Dodaj dane do faktury</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color: white; font-size: 20px; border-radius: 30%; background-color: dimgrey;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="CreateInvoiceItem">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="Id" class="form-control" type="hidden" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"><i class="fa fa-file-text-o"></i> Opis</label>
+                        <input asp-for="Description" class="form-control" placeholder="Opis" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"><i class="fa fa-info-circle"></i> Ilość</label>
+                        <input asp-for="Quantity" class="form-control" placeholder="Ilość" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UnitPrice" class="control-label"><i class="fa fa-dollar"></i> Cena jednostkowa</label>
+                        <input asp-for="UnitPrice" class="form-control" placeholder="Cena jednostkowa" />
+                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NetAmount" class="control-label"><i class="fa fa-calculator"></i> Kwota netto</label>
+                        <input asp-for="NetAmount" class="form-control" placeholder="Kwota netto" />
+                        <span asp-validation-for="NetAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TaxRate" class="control-label"><i class="fa fa-percent"></i> Stawka VAT</label>
+                        <input asp-for="TaxRate" class="form-control" placeholder="Stawka podatkowa" />
+                        <span asp-validation-for="TaxRate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TaxAmount" class="control-label"><i class="fa fa-money"></i> Kwota VAT</label>
+                        <input asp-for="TaxAmount" class="form-control" placeholder="Kwota podatkowa" />
+                        <span asp-validation-for="TaxAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GrossAmount" class="control-label"><i class="fa fa-money"></i> Kwota brutto</label>
+                        <input asp-for="GrossAmount" class="form-control" placeholder="Kwota brutto" />
+                        <span asp-validation-for="GrossAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="InvoiceId" class="form-control" type="hidden" />
+                    </div>
+                    <div class="form-group text-right mt-3">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

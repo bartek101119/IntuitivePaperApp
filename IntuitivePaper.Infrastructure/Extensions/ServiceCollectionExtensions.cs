@@ -20,6 +20,8 @@ namespace IntuitivePaper.Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("IntuitivePaperContext")));
 
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+            services.AddScoped<IInvoiceItemRepository, InvoiceItemRepository>();
         }
     }
 }

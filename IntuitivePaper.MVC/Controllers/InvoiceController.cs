@@ -3,6 +3,8 @@ using IntuitivePaper.Application.Invoice.Commands.CreateInvoice;
 using IntuitivePaper.Application.Invoice.Commands.EditInvoice;
 using IntuitivePaper.Application.Invoice.Queries.GetAllInvoices;
 using IntuitivePaper.Application.Invoice.Queries.GetByIdInvoice;
+using IntuitivePaper.Application.InvoiceItem.Commands;
+using IntuitivePaper.Application.InvoiceItem.Queries;
 using IntuitivePaper.MVC.Extensions;
 using IntuitivePaper.MVC.Models;
 using MediatR;
@@ -45,6 +47,29 @@ namespace IntuitivePaper.MVC.Controllers
             this.SetNotification("success", $"Created invoice number: {command.Number}"); // metoda rozszerzająca do ustawiania notyfikacji
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [Route("Invoice/InvoiceItem")]
+        public async Task<IActionResult> CreateInvoiceItem(CreateInvoiceItemCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("Invoice/{id}/InvoiceItem")]
+        public async Task<IActionResult> GetInvoiceItem(long id)
+        {
+            var data = await _mediator.Send(new GetAllInvoiceItemQuery(id));
+
+            return Ok(data);
         }
 
         [Route("Invoice/{id}/Edit")]
