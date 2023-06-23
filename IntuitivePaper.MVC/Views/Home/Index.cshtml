@@ -1,8 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona domowa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+
+    h1 {
+        text-align: center;
+    }
+
+    .container {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    .info-box {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .info-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .info-description {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .download-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .download-link a {
+            font-size: 18px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+            .download-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="container">
+    <h1>Tworzenie faktur VAT</h1>
+
+    <div class="info-box">
+        <div class="info-title">Tworzenie faktur VAT</div>
+        <div class="info-description">
+            Możesz skorzystać z naszego narzędzia do generowania faktur VAT w formacie PDF. Wypełnij wymagane informacje, a następnie wygeneruj fakturę klikając w odpowiedni przycisk. Plik PDF zostanie automatycznie pobrany na Twoje urządzenie.
+        </div>
+    </div>
+
+    <div class="info-box">
+        <div class="info-title">Instrukcja obsługi:</div>
+        <div class="info-description">
+            1. Wpisz odpowiednie dane w zakładce Stwórz fakturę.<br />
+            2. W zakładce Faktury przejdź do edycji pod przyciskiem Edytuj.<br />
+            3. Dodaj odpowiednie pozycje do faktury.<br />
+            4. W zakładce Faktury wciśnij przycisk odpowiedzialny za pobranie faktury.<br />
+            5. Gotowe! Możesz otworzyć pobrany plik PDF i wydrukować fakturę VAT.
+        </div>
+    </div>
+
+    <div class="download-link">
+        <a href="/Invoice/Create">Przejdź do generowania faktur VAT</a>
+    </div>
 </div>
