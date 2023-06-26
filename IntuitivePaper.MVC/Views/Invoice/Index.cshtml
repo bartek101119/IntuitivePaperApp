@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<IntuitivePaper.Application.Invoice.Dtos.InvoiceDto>
 
+@{
+    ViewData["Title"] = "Faktury";
+}
+
 <div class="row">
     @foreach (var invoice in Model)
     {
@@ -34,6 +38,7 @@
                 <div class="circle-actions">
                     <a class="btn btn-primary btn-sm" asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
                     <a class="btn btn-secondary btn-sm" asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
+                    <a class="btn btn-success btn-sm" asp-controller="Invoice" asp-action="GeneratePdf" asp-route-id="@invoice.Id">Generuj PDF</a>
                 </div>
             </div>
         </div>

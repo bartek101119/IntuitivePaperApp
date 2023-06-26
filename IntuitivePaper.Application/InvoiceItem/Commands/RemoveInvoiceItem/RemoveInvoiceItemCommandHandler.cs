@@ -22,10 +22,24 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.RemoveInvoiceItem
         {
             var invoice = await _invoiceRepository.GetById(request.InvoiceId);
 
-            var invoiceItem = await _invoiceItemRepository.GetById(request.InvoiceItemId);
+            if (invoice != null)
+            {
+                var invoiceItem = await _invoiceItemRepository.GetById(request.InvoiceItemId);
 
-            // Usuń element faktury
-            await _invoiceItemRepository.Delete(invoiceItem.Id);
+                if (invoiceItem != null)
+                {
+                    // Usuń element faktury
+                    await _invoiceItemRepository.Delete(invoiceItem.Id);
+
+                    // Zaktualizuj sumy na fakturze po usunięciu pozycji
+                    invoice.TotalNetAmount -= invoiceItem.NetAmount;
+                    invoice.TotalTaxAmount -= invoiceItem.TaxAmount;
+                    invoice.TotalGrossAmount -= invoiceItem.GrossAmount;
+
+                    // Zapisanie zmian w repozytorium faktur
+                    await _invoiceRepository.Update(invoice);
+                }
+            }
 
             return Unit.Value;
         }

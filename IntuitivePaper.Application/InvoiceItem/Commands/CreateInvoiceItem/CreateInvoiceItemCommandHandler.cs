@@ -25,19 +25,35 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
         {
             var invoice = await _invoiceRepository.GetById(request.InvoiceId);
 
-            var invoiceItem = new Domain.Entities.InvoiceItem()
+            if (invoice != null)
             {
-                Description = request.Description,
-                Quantity = request.Quantity,
-                UnitPrice = request.UnitPrice,
-                NetAmount = request.NetAmount,
-                TaxRate = request.TaxRate,
-                TaxAmount = request.TaxAmount,
-                GrossAmount = request.GrossAmount,
-                InvoiceId = invoice.Id
-            };
+                var invoiceItem = new Domain.Entities.InvoiceItem()
+                {
+                    Description = request.Description,
+                    Quantity = request.Quantity,
+                    UnitPrice = request.UnitPrice,
+                    NetAmount = request.NetAmount,
+                    TaxRate = request.TaxRate,
+                    TaxAmount = request.TaxAmount,
+                    GrossAmount = request.GrossAmount,
+                    InvoiceId = invoice.Id
+                };
 
-            await _invoiceItemRepository.Create(invoiceItem);
+                // Obliczanie kosztu faktury brutto
+                invoiceItem.NetAmount = invoiceItem.Quantity * invoiceItem.UnitPrice;
+                invoiceItem.TaxAmount = invoiceItem.NetAmount * (invoiceItem.TaxRate / 100);
+                invoiceItem.GrossAmount = invoiceItem.NetAmount + invoiceItem.TaxAmount;
+
+                await _invoiceItemRepository.Create(invoiceItem);
+
+                // Aktualizacja sumy kwot na fakturze
+                invoice.TotalNetAmount += invoiceItem.NetAmount;
+                invoice.TotalTaxAmount += invoiceItem.TaxAmount;
+                invoice.TotalGrossAmount += invoiceItem.GrossAmount;
+
+                // Zapisanie zmian w repozytorium faktur
+                await _invoiceRepository.Update(invoice);
+            }
 
             return Unit.Value;
         }

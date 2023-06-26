@@ -6,6 +6,7 @@ using IntuitivePaper.Application.Invoice.Queries.GetByIdInvoice;
 using IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem;
 using IntuitivePaper.Application.InvoiceItem.Commands.RemoveInvoiceItem;
 using IntuitivePaper.Application.InvoiceItem.Queries.GetAllInvoiceItem;
+using IntuitivePaper.Domain.Interfaces;
 using IntuitivePaper.MVC.Extensions;
 using IntuitivePaper.MVC.Models;
 using MediatR;
@@ -18,11 +19,30 @@ namespace IntuitivePaper.MVC.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly IPdfService _pdfService;
+        private readonly IInvoiceRepository _invoiceRepository;
 
-        public InvoiceController(IMediator mediator, IMapper mapper)
+        public InvoiceController(IMediator mediator, IMapper mapper, IPdfService pdfService, IInvoiceRepository invoiceRepository)
         {
             _mediator = mediator;
             _mapper = mapper;
+            _pdfService = pdfService;
+            _invoiceRepository = invoiceRepository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GeneratePdf(long id)
+        {
+            var invoice = await _invoiceRepository.GetByIdWithItem(id);
+            if (invoice != null)
+            {
+                var pdfBytes = _pdfService.GeneratePdf(invoice);
+
+                // Zwróć plik PDF jako odpowiedź
+                return File(pdfBytes, "application/pdf", "invoice.pdf");
+            }
+
+            return BadRequest();
         }
         public async Task<IActionResult> Index()
         {

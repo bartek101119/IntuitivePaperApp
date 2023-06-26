@@ -9,6 +9,8 @@ using IntuitivePaper.Application.Invoice.Commands.CreateInvoice;
 using IntuitivePaper.Application.Mappings;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using IntuitivePaper.Domain.Interfaces;
+using IntuitivePaper.Application.Services;
 
 namespace IntuitivePaper.Application.Extensions
 {
@@ -19,6 +21,8 @@ namespace IntuitivePaper.Application.Extensions
             services.AddMediatR(typeof(CreateInvoiceCommand));
 
             services.AddAutoMapper(typeof(InvoiceMappingProfile));
+
+            services.AddScoped<IPdfService, PdfService>();
 
             services.AddValidatorsFromAssemblyContaining<CreateInvoiceCommandValidator>()
                 .AddFluentValidationAutoValidation()

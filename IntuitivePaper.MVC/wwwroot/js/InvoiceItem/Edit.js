@@ -9,16 +9,16 @@
 
             // Generowanie zawartości kwadratu na podstawie właściwości faktury
             const description = $('<p></p>').text(`Opis: ${element.description}`);
+            const unitPrice = $('<p></p>').text(`Cena jednostkowa: ${element.unitPrice} PLN`);
             const quantity = $('<p></p>').text(`Ilość: ${element.quantity}`);
-            const unitPrice = $('<p></p>').text(`Cena jednostkowa netto: ${element.unitPrice}`);
-            const netAmount = $('<p></p>').text(`Wartość netto: ${element.netAmount}`);
-            const taxRate = $('<p></p>').text(`Stawka podatku VAT: ${element.taxRate}`);
-            const taxAmount = $('<p></p>').text(`Kwota podatku VAT: ${element.taxAmount}`);
-            const grossAmount = $('<p></p>').text(`Wartość brutto: ${element.grossAmount}`);
+            const netAmount = $('<p></p>').text(`Wartość netto: ${element.netAmount} PLN`);
+            const taxRate = $('<p></p>').text(`Stawka podatku VAT: ${element.taxRate}%`);
+            const taxAmount = $('<p></p>').text(`Kwota podatku VAT: ${element.taxAmount} PLN`);
+            const grossAmount = $('<p></p>').text(`Wartość brutto: ${element.grossAmount} PLN`);
             const deleteButton = $('<button class="delete-button">Usuń</button>');
 
             // Dodawanie wygenerowanych elementów do kwadratu
-            square.append(description, quantity, unitPrice, netAmount, taxRate, taxAmount, grossAmount, deleteButton);
+            square.append(description, unitPrice, quantity, netAmount, taxRate, taxAmount, grossAmount, deleteButton);
 
             // Dodawanie kwadratu do kontenera
             container.append(square);
@@ -84,12 +84,26 @@
     $("#createInvoiceItemModal form").submit(function (event) {
         event.preventDefault();
 
+        const container = $("#invoiceItem");
+        const invoiceId = container.data("id");
+
         $.ajax({
             url: $(this).attr('action'),
             type: $(this).attr('method'),
             data: $(this).serialize(),
             success: function (data) {
                 toastr["success"]("Dodano nową pozycję do faktury")
+                // Załaduj zaktualizowane pozycje faktury
+                $.ajax({
+                    url: `/Invoice/${invoiceId}/InvoiceItem`,
+                    type: 'get',
+                    success: function (response) {
+                        RenderInvoiceItem(response, container);
+                    },
+                    error: function () {
+                        toastr["error"]("Błąd podczas pobierania danych");
+                    }
+                });
             },
             error: function () {
                 toastr["error"]("Dodawanie nie powiodło się")
