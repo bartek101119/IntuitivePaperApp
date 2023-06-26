@@ -1,2 +1,145 @@
-﻿<p>Faktura VAT</p>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Faktura VAT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .summary {
+            margin-top: 20px;
+        }
+
+            .summary p {
+                font-weight: bold;
+            }
+
+        .invoice-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .invoice-info div {
+                width: 49%;
+            }
+
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .signature-box {
+            width: 400px;
+            height: 150px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Faktura VAT @Model.Number</h1>
+
+    <div class="invoice-info">
+        <div>
+            <h2>Sprzedawca:</h2>
+            <p>Nazwa: @Model.SellerName</p>
+            <p>Adres: @Model.SellerAddress</p>
+            <p>NIP: @Model.SellerTaxId</p>
+        </div>
+
+        <div>
+            <h2>Nabywca:</h2>
+            <p>Nazwa: @Model.BuyerName</p>
+            <p>Adres: @Model.BuyerAddress</p>
+            <p>NIP: @Model.BuyerTaxId</p>
+        </div>
+    </div>
+
+    <div class="invoice-info">
+        <div>
+            <p>Data wystawienia: @Model.Date.ToShortDateString()</p>
+        </div>
+    </div>
+
+    <h2>Pozycje:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Opis</th>
+                <th>Ilość</th>
+                <th>Cena jednostkowa netto</th>
+                <th>Wartość netto</th>
+                <th>Stawka podatku VAT</th>
+                <th>Kwota podatku VAT</th>
+                <th>Wartość brutto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Description</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.NetAmount</td>
+                    <td>@string.Format("{0:#.##}%", item.TaxRate)</td>
+                    <td>@item.TaxAmount</td>
+                    <td>@item.GrossAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <h2>Podsumowanie:</h2>
+        <p>Łączna kwota netto: @Model.TotalNetAmount</p>
+        <p>Łączna kwota podatku: @Model.TotalTaxAmount</p>
+        <p>Łączna kwota brutto: @Model.TotalGrossAmount</p>
+    </div>
+
+    <div class="signatures">
+        <div class="signature-box">
+            <p>Podpis sprzedawcy:</p>
+        </div>
+        <div class="signature-box">
+            <p>Podpis nabywcy:</p>
+        </div>
+    </div>
+
+</body>
+</html>

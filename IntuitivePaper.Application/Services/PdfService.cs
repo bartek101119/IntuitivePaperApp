@@ -1,11 +1,8 @@
 ﻿using IntuitivePaper.Domain.Interfaces;
 using iText.Html2pdf;
-using iText.Kernel.Pdf;
-using iText.Layout;
 using Microsoft.AspNetCore.Hosting;
 using RazorEngine;
 using RazorEngine.Templating;
-using System.IO;
 
 namespace IntuitivePaper.Application.Services
 {
