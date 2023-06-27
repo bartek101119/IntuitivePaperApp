@@ -36,6 +36,8 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
                     TaxRate = request.TaxRate,
                     TaxAmount = request.TaxAmount,
                     GrossAmount = request.GrossAmount,
+                    PKWiUorPKOB = request.PKWiUorPKOB,
+                    UnitMeasure = request.UnitMeasure,
                     InvoiceId = invoice.Id
                 };
 

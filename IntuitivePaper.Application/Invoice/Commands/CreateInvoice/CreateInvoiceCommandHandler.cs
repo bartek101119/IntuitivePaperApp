@@ -23,6 +23,8 @@ namespace IntuitivePaper.Application.Invoice.Commands.CreateInvoice
         {
             var invoice = _mapper.Map<Domain.Entities.Invoice>(request);
 
+            invoice.NumberAsWords = "metoda do stworzenia";
+
             await _invoiceRepository.Create(invoice);
 
             return Unit.Value;

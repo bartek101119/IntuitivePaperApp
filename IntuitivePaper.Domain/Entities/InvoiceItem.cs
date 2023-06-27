@@ -16,6 +16,8 @@ namespace IntuitivePaper.Domain.Entities
         public decimal TaxRate { get; set; } // Stawka podatku VAT
         public decimal TaxAmount { get; set; } // Kwota podatku VAT
         public decimal GrossAmount { get; set; } // Wartość brutto
+        public string PKWiUorPKOB { get; set; } = default!; // PKWiU
+        public string UnitMeasure { get; set; } = default!; // Jednostka miary
 
         public long InvoiceId { get; set; } // Klucz obcy do faktury VAT
         public Invoice Invoice { get; set; } = default!;// Nawigacja do faktury VAT

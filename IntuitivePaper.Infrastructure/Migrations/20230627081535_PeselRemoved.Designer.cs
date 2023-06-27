@@ -4,6 +4,7 @@ using IntuitivePaper.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntuitivePaper.Infrastructure.Migrations
 {
     [DbContext(typeof(IntuitivePaperContext))]
-    partial class IntuitivePaperContextModelSnapshot : ModelSnapshot
+    [Migration("20230627081535_PeselRemoved")]
+    partial class PeselRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,7 +125,11 @@ namespace IntuitivePaper.Infrastructure.Migrations
                     b.Property<decimal>("NetAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("PKWiUorPKOB")
+                    b.Property<string>("PKOB")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PKWiU")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -4,6 +4,7 @@ using IntuitivePaper.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntuitivePaper.Infrastructure.Migrations
 {
     [DbContext(typeof(IntuitivePaperContext))]
-    partial class IntuitivePaperContextModelSnapshot : ModelSnapshot
+    [Migration("20230627063551_PlaceOfIssueColumnAdded")]
+    partial class PlaceOfIssueColumnAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,8 @@ namespace IntuitivePaper.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Bank")
                         .IsRequired()
@@ -43,6 +45,10 @@ namespace IntuitivePaper.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BuyerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BuyerPESEL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -80,6 +86,10 @@ namespace IntuitivePaper.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SellerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SellerPESEL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -122,7 +132,11 @@ namespace IntuitivePaper.Infrastructure.Migrations
                     b.Property<decimal>("NetAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("PKWiUorPKOB")
+                    b.Property<string>("PKOB")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PKWiU")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

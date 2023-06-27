@@ -65,7 +65,7 @@ namespace IntuitivePaper.MVC.Controllers
 
             await _mediator.Send(command);
 
-            this.SetNotification("success", $"Created invoice number: {command.Number}"); // metoda rozszerzająca do ustawiania notyfikacji
+            this.SetNotification("success", $"Utworzono fakturę numer: {command.Number}"); // metoda rozszerzająca do ustawiania notyfikacji
 
             return RedirectToAction(nameof(Index));
         }

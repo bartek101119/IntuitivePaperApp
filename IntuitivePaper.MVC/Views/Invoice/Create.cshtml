@@ -4,7 +4,7 @@
     ViewData["Title"] = "Stwórz fakturę";
 }
 
-<h1>Dodaj</h1>
+<h1>Stwórz fakturę</h1>
 
 <hr />
 <form asp-action="Create">
@@ -19,11 +19,20 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Date" class="form-label">Data</label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <label asp-for="PlaceOfIssue" class="form-label">Miejsce wystawienia</label>
+                <input asp-for="PlaceOfIssue" class="form-control" />
+                <span asp-validation-for="PlaceOfIssue" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="Date" class="form-label">Data wystawienia</label>
+                <input asp-for="Date" class="form-control" type="date" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="SellerName" class="form-label">Nazwa sprzedawcy</label>
                 <input asp-for="SellerName" class="form-control" />
@@ -43,9 +52,10 @@
             </div>
         </div>
 
+
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="BuyerName" class="form-label">Nazwa kupującego</label>
+                <label asp-for="BuyerName" class="form-label">Nazwa nabywcy</label>
                 <input asp-for="BuyerName" class="form-control" />
                 <span asp-validation-for="BuyerName" class="text-danger"></span>
             </div>
@@ -62,16 +72,47 @@
                 <span asp-validation-for="BuyerTaxId" class="text-danger"></span>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="SaleDate" class="form-label">Data sprzedaży</label>
+                <input asp-for="SaleDate" class="form-control" type="date" />
+                <span asp-validation-for="SaleDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentMethod" class="form-label">Sposób zapłaty</label>
+                <input asp-for="PaymentMethod" class="form-control" type="text" />
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentDate" class="form-label">Termin płatności</label>
+                <input asp-for="PaymentDate" class="form-control" type="date" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Bank" class="form-label">Bank</label>
+                <input asp-for="Bank" class="form-control" />
+                <span asp-validation-for="Bank" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="form-label">Numer konta</label>
+                <input asp-for="AccountNumber" class="form-control" type="text" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+        </div>
     </div>
 
     <div class="form-group mt-4">
         <button type="submit" class="btn btn-primary">Zapisz</button>
+        <a asp-action="Index" class="btn btn-custom">Wróć do listy</a>
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{
@@ -108,4 +149,14 @@
             background-color: #0069d9;
             border-color: #0062cc;
         }
+
+    .btn-custom {
+        background-color: yellowgreen;
+        border-color: yellowgreen;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
 </style>

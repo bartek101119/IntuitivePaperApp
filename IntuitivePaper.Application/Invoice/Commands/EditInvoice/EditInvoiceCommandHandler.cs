@@ -33,6 +33,12 @@ namespace IntuitivePaper.Application.Invoice.Commands.EditInvoice
                 invoice.BuyerName = request.BuyerName;
                 invoice.BuyerAddress = request.BuyerAddress;
                 invoice.BuyerTaxId = request.BuyerTaxId;
+                invoice.PlaceOfIssue = request.PlaceOfIssue;
+                invoice.SaleDate = request.SaleDate;
+                invoice.PaymentDate = request.PaymentDate;
+                invoice.PaymentMethod = request.PaymentMethod;
+                invoice.Bank = request.Bank;
+                invoice.AccountNumber = request.AccountNumber;
 
                 // Modyfikacje innych właściwości faktury
             }

@@ -21,6 +21,7 @@ namespace IntuitivePaper.Application.Mappings
         public void Invoice()
         {
             CreateMap<InvoiceDto, Domain.Entities.Invoice>()
+                .ForMember(x => x.NumberAsWords, y => y.Ignore())
                 .ReverseMap();
 
             CreateMap<InvoiceDto, EditInvoiceCommand>();

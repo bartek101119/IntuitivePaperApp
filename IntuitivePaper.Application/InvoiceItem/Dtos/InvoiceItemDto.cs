@@ -16,5 +16,7 @@ namespace IntuitivePaper.Application.InvoiceItem.Dtos
         public decimal TaxRate { get; set; } // Stawka podatku VAT
         public decimal TaxAmount { get; set; } // Kwota podatku VAT
         public decimal GrossAmount { get; set; } // Wartość brutto
+        public string PKWiUorPKOB { get; set; } = default!; // PKWiU
+        public string UnitMeasure { get; set; } = default!; // Jednostka miary
     }
 }
