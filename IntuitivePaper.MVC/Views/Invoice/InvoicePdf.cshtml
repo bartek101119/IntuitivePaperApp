@@ -1,145 +1,144 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
     <title>Faktura VAT</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-size: 12px;
         }
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
+        .container {
+            display: flex;
+            flex-direction: row;
         }
 
-        h2 {
-            margin-top: 30px;
-        }
-
-        p {
+        .box {
+            border: 1px solid black;
+            padding: 5px;
             margin-bottom: 5px;
+            text-align: center;
+            font-size: 10px;
         }
 
-        table {
+        .left-box {
+            width: 50%;
+        }
+
+        .right-box {
+            width: 50%;
+        }
+
+        .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
+            font-size: 10px;
         }
 
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
+            .table th, .table td {
+                border: 1px solid black;
+                padding: 3px;
+                text-align: center; /* Wyśrodkowanie wartości */
+            }
 
         .summary {
-            margin-top: 20px;
-        }
-
-            .summary p {
-                font-weight: bold;
-            }
-
-        .invoice-info {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-            .invoice-info div {
-                width: 49%;
-            }
-
-        .signatures {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .signature-box {
-            width: 400px;
-            height: 150px;
-            border: 1px solid #ddd;
-            padding: 5px;
-            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Faktura VAT @Model.Number</h1>
-
-    <div class="invoice-info">
-        <div>
-            <h2>Sprzedawca:</h2>
-            <p>Nazwa: @Model.SellerName</p>
-            <p>Adres: @Model.SellerAddress</p>
+    <div class="container">
+        <div class="left-box box">
+            <h2>FAKTURA VAT</h2>
+            <p>@Model.Number</p>
+        </div>
+        <div class="right-box box">
+            <p>Miejsce wystawienia: @Model.PlaceOfIssue</p>
+            <p>Data wystawienia: @Model.Date.ToShortDateString()</p>
+            <p>Data sprzedaży: @Model.SaleDate.ToShortDateString()</p>
+            <p>Sposób zapłaty: @Model.PaymentMethod</p>
+            <p>Termin zapłaty: @Model.PaymentDate.ToShortDateString()</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left-box box">
+            <h3>Sprzedawca</h3>
+            <p>@Model.SellerName</p>
+            <p>@Model.SellerAddress</p>
             <p>NIP: @Model.SellerTaxId</p>
         </div>
-
-        <div>
-            <h2>Nabywca:</h2>
-            <p>Nazwa: @Model.BuyerName</p>
-            <p>Adres: @Model.BuyerAddress</p>
+        <div class="right-box box">
+            <h3>Nabywca</h3>
+            <p>@Model.BuyerName</p>
+            <p>@Model.BuyerAddress</p>
             <p>NIP: @Model.BuyerTaxId</p>
         </div>
     </div>
-
-    <div class="invoice-info">
-        <div>
-            <p>Data wystawienia: @Model.Date.ToShortDateString()</p>
-        </div>
+    <div class="box">
+        <h3>Bank i numer konta</h3>
+        <p>@Model.Bank</p>
+        <p>Numer konta: @Model.AccountNumber</p>
     </div>
-
-    <h2>Pozycje:</h2>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Opis</th>
+                <th>Poz. faktury VAT</th>
+                <th>Nazwa towaru/usługi</th>
+                <th>Symbol PKWiU/PKOB</th>
+                <th>Jm</th>
                 <th>Ilość</th>
                 <th>Cena jednostkowa netto</th>
                 <th>Wartość netto</th>
-                <th>Stawka podatku VAT</th>
-                <th>Kwota podatku VAT</th>
+                <th>Stawka VAT [%]</th>
+                <th>Kwota VAT</th>
                 <th>Wartość brutto</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Items)
+            @for (var i = 0; i < Model.Items.Count; i++)
             {
+                var item = Model.Items[i];
                 <tr>
+                    <td>@(i + 1)</td>
                     <td>@item.Description</td>
-                    <td>@item.Quantity</td>
+                    <td>@item.PKWiUorPKOB</td>
+                    <td>@item.UnitMeasure</td>
+                    <td>@(item.Quantity > 0 ? @item.Quantity : "")</td>
                     <td>@item.UnitPrice</td>
                     <td>@item.NetAmount</td>
-                    <td>@string.Format("{0:#.##}%", item.TaxRate)</td>
+                    <td>@string.Format("{0:#.##}", item.TaxRate)</td>
                     <td>@item.TaxAmount</td>
                     <td>@item.GrossAmount</td>
                 </tr>
             }
         </tbody>
     </table>
-
+    <br />
+    <br />
     <div class="summary">
-        <h2>Podsumowanie:</h2>
-        <p>Łączna kwota netto: @Model.TotalNetAmount</p>
-        <p>Łączna kwota podatku: @Model.TotalTaxAmount</p>
-        <p>Łączna kwota brutto: @Model.TotalGrossAmount</p>
+        <p>Łączna kwota netto: @Model.TotalNetAmount zł</p>
+        <p>Łączna kwota podatku: @Model.TotalTaxAmount zł</p>
+        <p>Łączna kwota brutto: @Model.TotalGrossAmount zł</p>
+        <p>Słownie: @Model.NumberAsWords</p>
+        <p>Stawki VAT: 23 | 8 | 5 | 0 | zw</p>
     </div>
 
-    <div class="signatures">
-        <div class="signature-box">
-            <p>Podpis sprzedawcy:</p>
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="left-box box">
+            <h3>Odbiorca faktury</h3>
+            <p>Data: ...................................................</p>
+            <p>Podpis: ...................................................</p>
         </div>
-        <div class="signature-box">
-            <p>Podpis nabywcy:</p>
+        <div class="right-box box">
+            <h3>Wystawca faktury</h3>
+            <p>Data: ...................................................</p>
+            <p>Podpis: ...................................................</p>
         </div>
     </div>
-
 </body>
 </html>

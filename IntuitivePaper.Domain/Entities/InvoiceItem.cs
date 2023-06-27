@@ -10,14 +10,14 @@ namespace IntuitivePaper.Domain.Entities
     {
         public long Id { get; set; }
         public string Description { get; set; } = default!; // Opis towaru lub usługi
-        public int Quantity { get; set; } // Ilość
+        public int? Quantity { get; set; } // Ilość
         public decimal UnitPrice { get; set; } // Cena jednostkowa netto
         public decimal NetAmount { get; set; } // Wartość netto
         public decimal TaxRate { get; set; } // Stawka podatku VAT
         public decimal TaxAmount { get; set; } // Kwota podatku VAT
         public decimal GrossAmount { get; set; } // Wartość brutto
-        public string PKWiUorPKOB { get; set; } = default!; // PKWiU
-        public string UnitMeasure { get; set; } = default!; // Jednostka miary
+        public string? PKWiUorPKOB { get; set; } // PKWiU
+        public string? UnitMeasure { get; set; } // Jednostka miary
 
         public long InvoiceId { get; set; } // Klucz obcy do faktury VAT
         public Invoice Invoice { get; set; } = default!;// Nawigacja do faktury VAT

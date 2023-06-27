@@ -87,27 +87,35 @@
         const container = $("#invoiceItem");
         const invoiceId = container.data("id");
 
-        $.ajax({
-            url: $(this).attr('action'),
-            type: $(this).attr('method'),
-            data: $(this).serialize(),
-            success: function (data) {
-                toastr["success"]("Dodano nową pozycję do faktury")
-                // Załaduj zaktualizowane pozycje faktury
-                $.ajax({
-                    url: `/Invoice/${invoiceId}/InvoiceItem`,
-                    type: 'get',
-                    success: function (response) {
-                        RenderInvoiceItem(response, container);
-                    },
-                    error: function () {
-                        toastr["error"]("Błąd podczas pobierania danych");
-                    }
-                });
-            },
-            error: function () {
-                toastr["error"]("Dodawanie nie powiodło się")
-            }
-        })
+        const invoiceItemsCount = container.find('.square').length;
+        console.log('Liczba pozycji:', invoiceItemsCount); // Sprawdzenie liczby pozycji na konsoli
+
+        if (invoiceItemsCount < 13) {
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (data) {
+                    toastr["success"]("Dodano nową pozycję do faktury")
+                    // Załaduj zaktualizowane pozycje faktury
+                    $.ajax({
+                        url: `/Invoice/${invoiceId}/InvoiceItem`,
+                        type: 'get',
+                        success: function (response) {
+                            RenderInvoiceItem(response, container);
+                        },
+                        error: function () {
+                            toastr["error"]("Błąd podczas pobierania danych");
+                        }
+                    });
+                },
+                error: function () {
+                    toastr["error"]("Dodawanie nie powiodło się")
+                }
+            })
+        }
+        else {
+            toastr["error"]("Możesz dodać maksymalnie 13 pozycji na fakturze")
+        }
     })
 });

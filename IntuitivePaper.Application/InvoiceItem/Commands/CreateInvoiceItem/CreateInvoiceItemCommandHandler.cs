@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using IntuitivePaper.Domain.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
 {
@@ -42,7 +38,7 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
                 };
 
                 // Obliczanie kosztu faktury brutto
-                invoiceItem.NetAmount = invoiceItem.Quantity * invoiceItem.UnitPrice;
+                invoiceItem.NetAmount = (invoiceItem.Quantity > 0) ? invoiceItem.Quantity.Value * invoiceItem.UnitPrice : invoiceItem.UnitPrice;
                 invoiceItem.TaxAmount = invoiceItem.NetAmount * (invoiceItem.TaxRate / 100);
                 invoiceItem.GrossAmount = invoiceItem.NetAmount + invoiceItem.TaxAmount;
 
@@ -53,6 +49,8 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem
                 invoice.TotalTaxAmount += invoiceItem.TaxAmount;
                 invoice.TotalGrossAmount += invoiceItem.GrossAmount;
 
+                // Zamiana decimala na słowo
+                invoice.NumberAsWords = NumberToWordConverter.AmountInWords(invoice.TotalGrossAmount, "PLN");
                 // Zapisanie zmian w repozytorium faktur
                 await _invoiceRepository.Update(invoice);
             }

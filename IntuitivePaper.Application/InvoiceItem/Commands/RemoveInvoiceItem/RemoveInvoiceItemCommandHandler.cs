@@ -36,6 +36,9 @@ namespace IntuitivePaper.Application.InvoiceItem.Commands.RemoveInvoiceItem
                     invoice.TotalTaxAmount -= invoiceItem.TaxAmount;
                     invoice.TotalGrossAmount -= invoiceItem.GrossAmount;
 
+                    // Zamiana decimala na słowo
+                    invoice.NumberAsWords = NumberToWordConverter.AmountInWords(invoice.TotalGrossAmount, "PLN");
+
                     // Zapisanie zmian w repozytorium faktur
                     await _invoiceRepository.Update(invoice);
                 }
