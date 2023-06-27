@@ -14,7 +14,7 @@
 
         .box {
             border: 1px solid black;
-            padding: 5px;
+            padding: 2px;
             margin-bottom: 5px;
             text-align: center;
             font-size: 10px;
@@ -52,32 +52,34 @@
     <div class="container">
         <div class="left-box box">
             <h2>FAKTURA VAT</h2>
-            <p>@Model.Number</p>
+            <h2>@Model.Number</h2>
         </div>
         <div class="right-box box">
             <p>Miejsce wystawienia: @Model.PlaceOfIssue</p>
             <p>Data wystawienia: @Model.Date.ToShortDateString()</p>
+            <hr>
             <p>Data sprzedaży: @Model.SaleDate.ToShortDateString()</p>
+            <hr>
             <p>Sposób zapłaty: @Model.PaymentMethod</p>
             <p>Termin zapłaty: @Model.PaymentDate.ToShortDateString()</p>
         </div>
     </div>
     <div class="container">
         <div class="left-box box">
-            <h3>Sprzedawca</h3>
+            <h3>Sprzedawca:</h3>
             <p>@Model.SellerName</p>
             <p>@Model.SellerAddress</p>
             <p>NIP: @Model.SellerTaxId</p>
         </div>
         <div class="right-box box">
-            <h3>Nabywca</h3>
+            <h3>Nabywca:</h3>
             <p>@Model.BuyerName</p>
             <p>@Model.BuyerAddress</p>
             <p>NIP: @Model.BuyerTaxId</p>
         </div>
     </div>
     <div class="box">
-        <h3>Bank i numer konta</h3>
+        <h3>Bank i numer konta:</h3>
         <p>@Model.Bank</p>
         <p>Numer konta: @Model.AccountNumber</p>
     </div>
@@ -116,28 +118,28 @@
         </tbody>
     </table>
     <br />
-    <br />
-    <div class="summary">
-        <p>Łączna kwota netto: @Model.TotalNetAmount zł</p>
-        <p>Łączna kwota podatku: @Model.TotalTaxAmount zł</p>
-        <p>Łączna kwota brutto: @Model.TotalGrossAmount zł</p>
-        <p>Słownie: @Model.NumberAsWords</p>
-        <p>Stawki VAT: 23 | 8 | 5 | 0 | zw</p>
+    <div class="box">
+        <div class="summary">
+            <p>Łączna kwota netto: @Model.TotalNetAmount zł</p>
+            <p>Łączna kwota podatku: @Model.TotalTaxAmount zł</p>
+            <p>Łączna kwota brutto: @Model.TotalGrossAmount zł</p>
+            <p>Słownie: @Model.NumberAsWords</p>
+            <p>Stawki VAT: 23 | 8 | 5 | 0 | zw</p>
+        </div>
     </div>
-
     <br />
     <br />
 
     <div class="container">
         <div class="left-box box">
-            <h3>Odbiorca faktury</h3>
-            <p>Data: ...................................................</p>
-            <p>Podpis: ...................................................</p>
+            <h3>Wystawca faktury:</h3>
+            <p>Data: ...................................................................</p>
+            <p>Podpis: ...................................................................</p>
         </div>
         <div class="right-box box">
-            <h3>Wystawca faktury</h3>
-            <p>Data: ...................................................</p>
-            <p>Podpis: ...................................................</p>
+            <h3>Odbiorca faktury:</h3>
+            <p>Data: ...................................................................</p>
+            <p>Podpis: ...................................................................</p>
         </div>
     </div>
 </body>
