@@ -28,5 +28,6 @@ namespace IntuitivePaper.Application.Invoice.Dtos
         public decimal TotalNetAmount { get; set; } // Łączna kwota netto
         public decimal TotalTaxAmount { get; set; } // Łączna kwota podatku
         public decimal TotalGrossAmount { get; set; } // Łączna kwota brutto
+        public DateTime DateCreatedUtc { get; set; } // Data utworzenia faktury
     }
 }

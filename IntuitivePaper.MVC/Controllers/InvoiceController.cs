@@ -45,10 +45,29 @@ namespace IntuitivePaper.MVC.Controllers
 
             return BadRequest();
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string searchString = "")
         {
             var invoices = await _mediator.Send(new GetAllInvoicesQuery());
-            return View(invoices);
+
+            var filteredInvoices = invoices
+                .Where(i => i.Number
+                .Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(x => x.DateCreatedUtc);
+
+            int pageSize = 12;
+            var paginatedInvoices = filteredInvoices
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            var viewModel = new InvoiceViewModel
+            {
+                Invoices = paginatedInvoices.ToList(),
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling((double)filteredInvoices.Count() / pageSize),
+                SearchString = searchString
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()

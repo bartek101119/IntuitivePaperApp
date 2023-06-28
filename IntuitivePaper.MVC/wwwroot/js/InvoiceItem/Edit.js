@@ -88,7 +88,6 @@
         const invoiceId = container.data("id");
 
         const invoiceItemsCount = container.find('.square').length;
-        console.log('Liczba pozycji:', invoiceItemsCount); // Sprawdzenie liczby pozycji na konsoli
 
         if (invoiceItemsCount < 13) {
             $.ajax({

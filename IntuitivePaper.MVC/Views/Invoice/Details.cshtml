@@ -11,17 +11,36 @@
 
 <div class="data-square">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="data-group">
+                <label class="data-label">Data utworzenia faktury</label>
+                <div class="data-value">@Model.DateCreatedUtc.ToShortDateString()</div>
+            </div>
+
             <div class="data-group">
                 <label class="data-label">Numer faktury</label>
                 <div class="data-value">@Model.Number</div>
             </div>
 
             <div class="data-group">
-                <label class="data-label">Data</label>
+                <label class="data-label">Data wystawienia</label>
                 <div class="data-value">@Model.Date.ToShortDateString()</div>
             </div>
+            <div class="data-group">
+                <label class="data-label">Miejsce wystawienia</label>
+                <div class="data-value">@Model.PlaceOfIssue</div>
+            </div>
+            <div class="data-group">
+                <label class="data-label">Data sprzedaży</label>
+                <div class="data-value">@Model.SaleDate.ToShortDateString()</div>
+            </div>
+            <div class="data-group">
+                <label class="data-label">Termin płatności</label>
+                <div class="data-value">@Model.PaymentDate.ToShortDateString()</div>
+            </div>
+        </div>
 
+        <div class="col-md-3">
             <div class="data-group">
                 <label class="data-label">Nazwa sprzedawcy</label>
                 <div class="data-value">@Model.SellerName</div>
@@ -36,9 +55,13 @@
                 <label class="data-label">NIP sprzedawcy</label>
                 <div class="data-value">@Model.SellerTaxId</div>
             </div>
+            <div class="data-group">
+                <label class="data-label">Bank</label>
+                <div class="data-value">@Model.Bank</div>
+            </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="data-group">
                 <label class="data-label">Nazwa nabywcy</label>
                 <div class="data-value">@Model.BuyerName</div>
@@ -53,9 +76,13 @@
                 <label class="data-label">NIP nabywcy</label>
                 <div class="data-value">@Model.BuyerTaxId</div>
             </div>
+            <div class="data-group">
+                <label class="data-label">Sposób zapłaty</label>
+                <div class="data-value">@Model.PaymentMethod</div>
+            </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="data-group">
                 <label class="data-label">Łączna kwota netto</label>
                 <div class="data-value">@Model.TotalNetAmount</div>
@@ -70,12 +97,17 @@
                 <label class="data-label">Łączna kwota brutto</label>
                 <div class="data-value">@Model.TotalGrossAmount</div>
             </div>
+
+            <div class="data-group">
+                <label class="data-label">Numer konta</label>
+                <div class="data-value">@Model.AccountNumber</div>
+            </div>
         </div>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Powrót do listy</a>
+    <a asp-action="Index" class="btn btn-custom">Wróć do listy</a>
 </div>
 
 <style>
@@ -115,4 +147,13 @@
             background-color: #0069d9;
             border-color: #0062cc;
         }
+
+    .btn-custom {
+        background-color: yellowgreen;
+        border-color: yellowgreen;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
 </style>

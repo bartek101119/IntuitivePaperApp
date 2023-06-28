@@ -1,55 +1,104 @@
-﻿@model IEnumerable<IntuitivePaper.Application.Invoice.Dtos.InvoiceDto>
+﻿@model InvoiceViewModel
 
 @{
     ViewData["Title"] = "Faktury";
 }
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    @foreach (var invoice in Model)
-    {
-        <div class="col-md-3 mb-3">
-            <div class="circle-card">
-                <div class="circle-content">
-                    <div class="circle-delete">
-                        <a class="delete-icon" asp-controller="Invoice" asp-action="DeleteInvoice" data-invoice-id="@invoice.Id">
-                            <div class="circle">
-                                <i class="fa fa-times"></i>
+    <!-- Stronicowanie i wyszukiwanie -->
+    <div class="row">
+        <div class="col-md-12">
+            <form method="get" action="@Url.Action("Index")">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="searchString">Wyszukaj po numerze:</label>
+                        <input type="text" id="searchString" name="searchString" value="@Model.SearchString" class="form-control custom-input" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="page">Strona:</label>
+                        <div class="input-group">
+                            <input type="number" id="page" name="page" value="@Model.CurrentPage" class="form-control custom-input" min="1" max="@Model.TotalPages" />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary custom-button">Szukaj</button>
                             </div>
-                        </a>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">Numer faktury</div>
-                        <div class="circle-value">@invoice.Number</div>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">Data wystawienia</div>
-                        <div class="circle-value">@invoice.Date.ToString("dd-MM-yyyy")</div>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">Nazwa sprzedawcy</div>
-                        <div class="circle-value">@invoice.SellerName</div>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">NIP sprzedawcy</div>
-                        <div class="circle-value">@invoice.SellerTaxId</div>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">Nazwa nabywcy</div>
-                        <div class="circle-value">@invoice.BuyerName</div>
-                    </div>
-                    <div class="circle-item">
-                        <div class="circle-label">NIP nabywcy</div>
-                        <div class="circle-value">@invoice.BuyerTaxId</div>
+                        </div>
                     </div>
                 </div>
-                <div class="circle-actions">
-                    <a class="btn btn-primary btn-sm" asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
-                    <a class="btn btn-secondary btn-sm" asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
-                    <a class="btn btn-success btn-sm" asp-controller="Invoice" asp-action="GeneratePdf" asp-route-id="@invoice.Id">Generuj PDF</a>
+            </form>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Wyświetlanie faktur -->
+    <div class="row">
+        @foreach (var invoice in Model.Invoices)
+        {
+            <div class="col-md-3 mb-3">
+                <div class="circle-card">
+                    <div class="circle-content">
+                        <div class="circle-delete">
+                            <a class="delete-icon" asp-controller="Invoice" asp-action="DeleteInvoice" data-invoice-id="@invoice.Id">
+                                <div class="circle">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">Data utworzenia</div>
+                            <div class="circle-value">@invoice.DateCreatedUtc.ToString("dd-MM-yyyy")</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">Numer faktury</div>
+                            <div class="circle-value">@invoice.Number</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">Data wystawienia</div>
+                            <div class="circle-value">@invoice.Date.ToString("dd-MM-yyyy")</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">Nazwa sprzedawcy</div>
+                            <div class="circle-value">@invoice.SellerName</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">NIP sprzedawcy</div>
+                            <div class="circle-value">@invoice.SellerTaxId</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">Nazwa nabywcy</div>
+                            <div class="circle-value">@invoice.BuyerName</div>
+                        </div>
+                        <div class="circle-item">
+                            <div class="circle-label">NIP nabywcy</div>
+                            <div class="circle-value">@invoice.BuyerTaxId</div>
+                        </div>
+                    </div>
+                    <div class="circle-actions">
+                        <a class="btn btn-primary btn-sm" asp-controller="Invoice" asp-action="Edit" asp-route-id="@invoice.Id">Edytuj</a>
+                        <a class="btn btn-secondary btn-sm" asp-controller="Invoice" asp-action="Details" asp-route-id="@invoice.Id">Szczegóły</a>
+                        <a class="btn btn-success btn-sm" asp-controller="Invoice" asp-action="GeneratePdf" asp-route-id="@invoice.Id">Generuj PDF</a>
+                    </div>
                 </div>
             </div>
+        }
+    </div>
+
+    <!-- Paginacja -->
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="Paginacja">
+                <ul id="pagination" class="pagination">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i, searchString = Model.SearchString })">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
         </div>
-    }
+    </div>
 </div>
 
 <!-- Modal -->
@@ -74,6 +123,7 @@
 </div>
 
 @section Scripts{
+    <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/js/Invoice/Index.js"></script>
 }
 
@@ -141,5 +191,37 @@
     .fa-times {
         font-size: 12px;
         line-height: 1;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+
+        .pagination .page-link {
+            color: #333;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+            .pagination .page-link:hover,
+            .pagination .page-link:focus {
+                color: #333;
+                background-color: #f5f5f5;
+                border-color: #ddd;
+            }
+
+        .pagination .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+    .custom-input {
+        margin-bottom: 8px;
+    }
+
+    .custom-button {
+        border-radius: 0 4px 4px 0;
     }
 </style>

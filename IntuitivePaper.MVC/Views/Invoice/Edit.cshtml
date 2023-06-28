@@ -113,6 +113,7 @@
     <div class="form-group mt-4">
         <button type="submit" class="btn btn-primary">Zapisz</button>
         <a asp-action="Index" class="btn btn-custom">Wróć do listy</a>
+        <a class="btn btn-success" asp-controller="Invoice" asp-action="GeneratePdf" asp-route-id="@Model.Id">Generuj PDF</a>
     </div>
 </form>
 
@@ -165,6 +166,15 @@
     .btn-custom {
         background-color: yellowgreen;
         border-color: yellowgreen;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .btn-success {
+        background-color: forestgreen;
+        border-color: forestgreen;
         color: #fff;
         padding: 10px 20px;
         font-size: 16px;
