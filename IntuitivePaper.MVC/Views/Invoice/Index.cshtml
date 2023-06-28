@@ -10,6 +10,13 @@
         <div class="col-md-3 mb-3">
             <div class="circle-card">
                 <div class="circle-content">
+                    <div class="circle-delete">
+                        <a class="delete-icon" asp-controller="Invoice" asp-action="DeleteInvoice" data-invoice-id="@invoice.Id">
+                            <div class="circle">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </a>
+                    </div>
                     <div class="circle-item">
                         <div class="circle-label">Numer faktury</div>
                         <div class="circle-value">@invoice.Number</div>
@@ -45,8 +52,34 @@
     }
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Potwierdzenie usunięcia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Czy na pewno chcesz usunąć tę fakturę?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmDelete">Usuń</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Invoice/Index.js"></script>
+}
+
 <style>
     .circle-card {
+        position: relative;
         background-color: #f7f7f7;
         border-radius: 50%;
         padding: 8px;
@@ -74,5 +107,39 @@
 
     .circle-actions {
         margin-top: 12px;
+    }
+
+    .circle-delete {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+    }
+
+    .delete-icon {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+    }
+
+    .circle {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fa-times {
+        font-size: 12px;
+        line-height: 1;
     }
 </style>

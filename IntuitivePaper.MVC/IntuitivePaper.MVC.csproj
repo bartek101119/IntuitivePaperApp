@@ -12,11 +12,16 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+		<PackageReference Include="popper.js" Version="1.16.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\IntuitivePaper.Application\IntuitivePaper.Application.csproj" />
 		<ProjectReference Include="..\IntuitivePaper.Infrastructure\IntuitivePaper.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\Invoice\" />
 	</ItemGroup>
 
 </Project>

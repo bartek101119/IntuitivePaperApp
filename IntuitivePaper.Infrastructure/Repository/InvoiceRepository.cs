@@ -39,5 +39,11 @@ namespace IntuitivePaper.Infrastructure.Repository
         public async Task<Invoice?> GetById(long id) => await _context.Invoices.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<Invoice?> GetByIdWithItem(long id) => await _context.Invoices.Include(x => x.Items).FirstOrDefaultAsync(x => x.Id == id);
+
+        public Task DeleteById(Invoice invoice)
+        {
+            _context.Invoices.Remove(invoice);
+            return Task.CompletedTask;
+        }
     }
 }

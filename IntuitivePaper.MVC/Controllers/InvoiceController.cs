@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IntuitivePaper.Application.Invoice.Commands.CreateInvoice;
 using IntuitivePaper.Application.Invoice.Commands.EditInvoice;
+using IntuitivePaper.Application.Invoice.Commands.RemoveInvoice;
 using IntuitivePaper.Application.Invoice.Queries.GetAllInvoices;
 using IntuitivePaper.Application.Invoice.Queries.GetByIdInvoice;
 using IntuitivePaper.Application.InvoiceItem.Commands.CreateInvoiceItem;
@@ -95,9 +96,18 @@ namespace IntuitivePaper.MVC.Controllers
 
         [HttpDelete]
         [Route("Invoice/{invoiceId}/InvoiceItem/{id}")]
-        public async Task<IActionResult> GetInvoiceItem(long invoiceId, long id)
+        public async Task<IActionResult> DeleteInvoiceItem(long invoiceId, long id)
         {
             await _mediator.Send(new RemoveInvoiceItemCommand(invoiceId, id));
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("Invoice/{invoiceId}")]
+        public async Task<IActionResult> DeleteInvoice(long invoiceId)
+        {
+            await _mediator.Send(new RemoveInvoiceCommand(invoiceId));
 
             return NoContent();
         }
