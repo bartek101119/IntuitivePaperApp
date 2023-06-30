@@ -1,15 +1,11 @@
 ﻿using IntuitivePaper.Domain.Entities;
-using IntuitivePaper.Infrastructure.SeederService;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace IntuitivePaper.Infrastructure.Data
 {
-    public class IntuitivePaperContext : DbContext
+    public class IntuitivePaperContext : IdentityDbContext
     {
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
@@ -20,6 +16,8 @@ namespace IntuitivePaper.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Invoice>()
             .HasMany(i => i.Items)
             .WithOne(ii => ii.Invoice)

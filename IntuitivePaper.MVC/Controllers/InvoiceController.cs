@@ -11,6 +11,7 @@ using IntuitivePaper.Domain.Interfaces;
 using IntuitivePaper.MVC.Extensions;
 using IntuitivePaper.MVC.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -45,6 +46,8 @@ namespace IntuitivePaper.MVC.Controllers
 
             return BadRequest();
         }
+
+        [Authorize]
         public async Task<IActionResult> Index(int page = 1, string searchString = "")
         {
             var invoices = await _mediator.Send(new GetAllInvoicesQuery());
@@ -70,6 +73,7 @@ namespace IntuitivePaper.MVC.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();

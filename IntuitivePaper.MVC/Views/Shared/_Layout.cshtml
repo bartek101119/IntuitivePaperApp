@@ -3,8 +3,8 @@
     var notification = TempData["Notification"] != null ?
                 (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)! : null;
 
-    var controller = ViewContext.RouteData.Values["Controller"]!.ToString();
-    var action = ViewContext.RouteData.Values["Action"]!.ToString();
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
 
     var currentUrl = $"{controller}/{action}";
 }
@@ -45,6 +45,7 @@
                             <a class="nav-link text-dark  @(currentUrl == "Invoice/Index" ? "active" : "")" asp-area="" asp-controller="Invoice" asp-action="Index">Faktury</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

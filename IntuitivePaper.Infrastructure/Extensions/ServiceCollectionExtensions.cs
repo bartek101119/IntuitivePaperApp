@@ -1,6 +1,7 @@
 ﻿using IntuitivePaper.Domain.Interfaces;
 using IntuitivePaper.Infrastructure.Data;
 using IntuitivePaper.Infrastructure.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,9 @@ namespace IntuitivePaper.Infrastructure.Extensions
         {
             services.AddDbContext<IntuitivePaperContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("IntuitivePaperContext")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<IntuitivePaperContext>();
 
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
