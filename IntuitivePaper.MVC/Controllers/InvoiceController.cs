@@ -140,6 +140,11 @@ namespace IntuitivePaper.MVC.Controllers
         {
             var invoiceDto = await _mediator.Send(new GetByIdInvoiceQuery(id));
 
+            if (!invoiceDto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
             var model = _mapper.Map<EditInvoiceCommand>(invoiceDto);
 
             return View(model);

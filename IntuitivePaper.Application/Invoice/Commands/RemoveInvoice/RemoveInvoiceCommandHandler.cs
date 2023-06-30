@@ -1,4 +1,5 @@
-﻿using IntuitivePaper.Domain.Interfaces;
+﻿using IntuitivePaper.Application.User;
+using IntuitivePaper.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace IntuitivePaper.Application.Invoice.Commands.RemoveInvoice
     public class RemoveInvoiceCommandHandler : IRequestHandler<RemoveInvoiceCommand>
     {
         private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IUserContext _userContext;
 
-        public RemoveInvoiceCommandHandler(IInvoiceRepository invoiceRepository)
+        public RemoveInvoiceCommandHandler(IInvoiceRepository invoiceRepository, IUserContext userContext)
         {
             _invoiceRepository = invoiceRepository;
+            _userContext = userContext;
         }
         public async Task<Unit> Handle(RemoveInvoiceCommand request, CancellationToken cancellationToken)
         {
@@ -22,6 +25,13 @@ namespace IntuitivePaper.Application.Invoice.Commands.RemoveInvoice
 
             if (invoice != null)
             {
+                var user = _userContext.GetCurrentUser();
+                var hasAccess = user != null && invoice.CreatedById == user.Id;
+                if (!hasAccess)
+                {
+                    return Unit.Value;
+                }
+
                 await _invoiceRepository.DeleteById(invoice);
 
                 await _invoiceRepository.Save();

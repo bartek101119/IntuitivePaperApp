@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,5 +30,8 @@ namespace IntuitivePaper.Domain.Entities
         public decimal TotalTaxAmount { get; set; } // Łączna kwota podatku
         public decimal TotalGrossAmount { get; set; } // Łączna kwota brutto
         public DateTime DateCreatedUtc { get; set; } = DateTime.UtcNow; // Data utworzenia faktury
+
+        public string? CreatedById { get; set; }
+        public string? CreatedBy { get; set; }
     }
 }

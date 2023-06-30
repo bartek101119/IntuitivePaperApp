@@ -11,6 +11,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using IntuitivePaper.Domain.Interfaces;
 using IntuitivePaper.Application.Services;
+using IntuitivePaper.Application.User;
+using AutoMapper;
 
 namespace IntuitivePaper.Application.Extensions
 {
@@ -20,13 +22,21 @@ namespace IntuitivePaper.Application.Extensions
         {
             services.AddMediatR(typeof(CreateInvoiceCommand));
 
-            services.AddAutoMapper(typeof(InvoiceMappingProfile));
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new InvoiceMappingProfile(userContext));
+            }).CreateMapper()
+            );
 
             services.AddScoped<IPdfService, PdfService>();
 
             services.AddValidatorsFromAssemblyContaining<CreateInvoiceCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
+
+            services.AddScoped<IUserContext, UserContext>();
         }
     }
 }
