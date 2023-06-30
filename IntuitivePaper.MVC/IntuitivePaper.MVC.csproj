@@ -21,7 +21,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="wwwroot\js\Invoice\" />
+		<Folder Include="wwwroot\js\Invoice\" />
+		<Content Update="Views\Invoice\InvoicePdf.cshtml">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
 	</ItemGroup>
 
 </Project>

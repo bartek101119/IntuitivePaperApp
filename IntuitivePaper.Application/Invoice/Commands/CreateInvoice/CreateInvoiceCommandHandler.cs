@@ -25,6 +25,8 @@ namespace IntuitivePaper.Application.Invoice.Commands.CreateInvoice
 
             invoice.NumberAsWords = "metoda do stworzenia";
 
+            invoice.DateCreatedUtc = DateTime.UtcNow;
+
             await _invoiceRepository.Create(invoice);
 
             return Unit.Value;

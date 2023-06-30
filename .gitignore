@@ -3,6 +3,26 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Ignorowanie plików appsettings.json dla różnych konfiguracji
+
+# Ignorowanie pliku appsettings.Development.json
+appsettings.Development.json
+
+# Ignorowanie pliku appsettings.Staging.json
+appsettings.Staging.json
+
+# Ignorowanie pliku appsettings.Production.json
+appsettings.Production.json
+
+# Ignorowanie pliku appsettings.local.json (opcjonalny plik konfiguracyjny dla środowiska lokalnego)
+appsettings.local.json
+
+# Ignorowanie wszystkich plików appsettings.*.json (dla innych niestandardowych konfiguracji)
+appsettings.*.json
+
+# Ignorowanie plików appsettings.json dla wszystkich konfiguracji
+appsettings.json
+
 # User-specific files
 *.rsuser
 *.suo
