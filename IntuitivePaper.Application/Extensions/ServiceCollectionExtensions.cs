@@ -13,6 +13,9 @@ using IntuitivePaper.Domain.Interfaces;
 using IntuitivePaper.Application.Services;
 using IntuitivePaper.Application.User;
 using AutoMapper;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace IntuitivePaper.Application.Extensions
 {
