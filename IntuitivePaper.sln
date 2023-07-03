@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.MVC", "IntuitivePaper.MVC\IntuitivePaper.MVC.csproj", "{3856D67A-A09C-4604-A7DF-972AB6471C19}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.Domain", "IntuitivePaper.Domain\IntuitivePaper.Domain.csproj", "{71A13143-ABE0-4AB2-BEDA-F60B570CD9A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.Application", "IntuitivePaper.Application\IntuitivePaper.Application.csproj", "{56D9C6F7-AE0B-497A-ADB4-67B5B484ECA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.Infrastructure", "IntuitivePaper.Infrastructure\IntuitivePaper.Infrastructure.csproj", "{37C8716E-7F77-4438-B7F2-4AD76E0F71EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.MVC", "IntuitivePaper.MVC\IntuitivePaper.MVC.csproj", "{A9F6A828-2664-4363-8388-2C945807AF29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3856D67A-A09C-4604-A7DF-972AB6471C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3856D67A-A09C-4604-A7DF-972AB6471C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3856D67A-A09C-4604-A7DF-972AB6471C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3856D67A-A09C-4604-A7DF-972AB6471C19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71A13143-ABE0-4AB2-BEDA-F60B570CD9A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71A13143-ABE0-4AB2-BEDA-F60B570CD9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A13143-ABE0-4AB2-BEDA-F60B570CD9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{37C8716E-7F77-4438-B7F2-4AD76E0F71EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37C8716E-7F77-4438-B7F2-4AD76E0F71EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37C8716E-7F77-4438-B7F2-4AD76E0F71EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F6A828-2664-4363-8388-2C945807AF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F6A828-2664-4363-8388-2C945807AF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F6A828-2664-4363-8388-2C945807AF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F6A828-2664-4363-8388-2C945807AF29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
