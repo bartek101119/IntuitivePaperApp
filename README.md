@@ -1,5 +1,5 @@
 # IntuitivePaperApp
-Project for creating VAT invoices
+Project for creating VAT invoices. [in progress]
 
 ## PL
 ### Intuitive Paper - Twórz faktury VAT
