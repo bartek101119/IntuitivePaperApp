@@ -37,6 +37,7 @@ Możesz edytować istniejące faktury, dodawać nowe pozycje, usuwać pozycje.
 Aplikacja oferuje intuicyjny interfejs użytkownika, który jest łatwy w obsłudze nawet dla początkujących użytkowników.
 
 ## EN
+## Intuitive Paper - Create VAT invoices.
 Welcome to Intuitive Paper - an online application that allows you to create VAT invoices in a simple and intuitive way. This application enables users to log in and generate VAT invoices in electronic format. Below you will find some information about the functionalities and usage of the application.
 
 ## Table of Contents
