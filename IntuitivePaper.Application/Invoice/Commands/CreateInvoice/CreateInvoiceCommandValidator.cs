@@ -18,7 +18,7 @@ namespace IntuitivePaper.Application.Invoice.Commands.CreateInvoice
             RuleFor(x => x.SellerTaxId).NotEmpty().MaximumLength(50).WithMessage("NIP sprzedawcy jest wymagany.");
             RuleFor(x => x.BuyerName).NotEmpty().WithMessage("Nazwa nabywcy jest wymagana.");
             RuleFor(x => x.BuyerAddress).NotEmpty().WithMessage("Adres nabywcy jest wymagany.");
-            RuleFor(x => x.BuyerTaxId).NotEmpty().WithMessage("NIP nabywcy jest wymagany.");
+            RuleFor(x => x.BuyerTaxId).NotEmpty().MaximumLength(50).WithMessage("NIP nabywcy jest wymagany.");
         }
     }
 
