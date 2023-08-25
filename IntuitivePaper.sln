@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntuitivePaper.MVC", "IntuitivePaper.MVC\IntuitivePaper.MVC.csproj", "{A9F6A828-2664-4363-8388-2C945807AF29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntuitivePaper.Application.Tests", "IntuitivePaper.ApplicationTests\IntuitivePaper.Application.Tests.csproj", "{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C7AFC75-F13D-4573-86AA-3C22D5558850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{A9F6A828-2664-4363-8388-2C945807AF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F6A828-2664-4363-8388-2C945807AF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F6A828-2664-4363-8388-2C945807AF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0494C37F-45C8-4DA0-8DA3-52F7DB81E4F3} = {1C7AFC75-F13D-4573-86AA-3C22D5558850}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56CE334E-D7A2-422D-8A25-7DDA17F71B6F}
